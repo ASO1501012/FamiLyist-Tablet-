@@ -1,0 +1,243 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <script src="components/loader.js"></script>
+    <link rel="stylesheet" href="components/loader.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/test.css"> 
+    <script src="components/ListManager.js"></script>
+    <script src="components/GoodsManager.js"></script>
+    <script src="components/LocalDBManager.js"></script>
+    
+    <!--ドロワーメニュー関連-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.1.0/css/drawer.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.1.3/iscroll.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.1.0/js/drawer.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script>
+        function getGoodsListBtnClick(){
+            var listManagerInstance = new ListManager();
+            var localDBManagerInstance = new LocalDBManager();
+            var tabletID = localDBManagerInstance.selectTabletID();
+            listManagerInstance.getGoodsList(tabletID);
+        }
+        function addGoodsListBtnClick(goodsID){
+            //alert(goodsID);
+            var listManagerInstance = new ListManager();
+            var localDBManagerInstance = new LocalDBManager();
+            var tabletID = localDBManagerInstance.selectTabletID();
+            listManagerInstance.addGoods(tabletID,goodsID);
+        }
+        function deleteGoodsListBtnClick(){
+            var listManagerInstance = new ListManager();
+            var localDBManagerInstance = new LocalDBManager();
+            var tabletID = localDBManagerInstance.selectTabletID();
+            listManagerInstance.deleteGoods(tabletID,document.getElementById("deleteGoodsID").value);
+        }
+        function plusGoodsNumBtnClick(goodsID,numTextID,num){
+            var listManagerInstance = new ListManager();
+            var localDBManagerInstance = new LocalDBManager();
+            var tabletID = localDBManagerInstance.selectTabletID();
+            listManagerInstance.plusGoods(tabletID,goodsID);
+            //$("#"+numTextID).html().substring(0,1);
+            // jQueryで実装
+            jQuery(function ($) {
+                var hogeText =  $("#"+numTextID).html();
+                num = hogeText.slice(0, -1);
+                num = Number(num) + 1; 
+                $("#"+numTextID).html(num+"個");
+            });
+        }
+        function minusGoodsNumBtnClick(goodsID,numTextID,num){
+            var listManagerInstance = new ListManager();
+            var localDBManagerInstance = new LocalDBManager();
+            var tabletID = localDBManagerInstance.selectTabletID();
+            listManagerInstance.minusGoods(tabletID,goodsID);
+            if($("#"+numTextID).html().substring(0,1) > 0){
+                // jQueryで実装
+                jQuery(function ($) {
+                    var hogeText =  $("#"+numTextID).html();
+                    num = hogeText.slice(0, -1);
+                    num = Number(num) - 1; 
+                    $("#"+numTextID).html(num+"個");
+                });
+            }
+        }
+    </script>
+    <script type="text/javascript"><!--
+// 配列や連想配列、オブジェクトなどの中身を視覚的に表示する関数
+function vardump(arr,lv,key) {
+    var dumptxt = "",
+        lv_idt = "",
+        type = Object.prototype.toString.call(arr).slice(8, -1);
+    if(!lv) lv = 0;
+    for(var i=0;i<lv;i++) lv_idt += "    ";
+    if(key) dumptxt += lv_idt + "[" + key + "] => ";
+    
+    if(arr == null || arr == undefined){
+        dumptxt += arr + '\n';
+    } else if(type == "Array" || type == "Object"){
+        dumptxt += type + "...{\n";
+        for(var item in arr) dumptxt += vardump(arr[item],lv+1,item);
+        dumptxt += lv_idt + "}\n";
+    } else if(type == "String"){
+        dumptxt += '"' + arr + '" ('+ type +')\n';
+    }  else if(type == "Number"){
+        dumptxt += arr + " (" + type + ")\n";
+    } else {
+        dumptxt += arr + " (" + type + ")\n";
+    }
+    return dumptxt;
+}
+--></script>
+</head>
+<body class="drawer drawer--left">
+<button type="button" class="drawer-toggle drawer-hamburger" id="drawer_button">
+            <span class="sr-only">toggle navigation</span>
+            <span class="drawer-hamburger-icon"></span>
+        </button>
+        <nav class="drawer-nav" role="navigation">
+        <!-- ここからドロップダウンの中身 -->
+        <ul class="drawer-menu">
+            <li class="item" ><a class="drawer-menu-item"  style="color:#ffffff;" href="./index.html" >タブレットID確認</a></li>
+            <li class="item"><a class="drawer-menu-item" style="color:#ffffff;" href="./list2.html" >リストに追加</a></li>
+            <li style="background-color:#f2eaea"><a class="drawer-menu-item" href="#" ></a></li>
+            <li class="item"><a class="drawer-menu-item" style="color:#ffffff;" href="./goods_register.html" >商品登録</a></li>
+            <li class="item"><a class="drawer-menu-item" style="color:#ffffff;" href="./goods_edit.html" >商品編集</a></li>
+            <li class="item"><a class="drawer-menu-item" style="color:#ffffff;" href="./shop_register.html" >お店の登録</a></li>
+            <li class="item"><a class="drawer-menu-item" style="color:#ffffff;" href="./shop_edit.html" >お店の編集</a></li>
+            <li style="background-color:#f2eaea"><a class="drawer-menu-item" href="#" ></a></li>
+            <li class="item"><a class="drawer-menu-item" style="color:#ffffff;" href="#" >ヘルプ</a></li>
+            <li class="item"><a class="drawer-menu-item" style="color:#ffffff;" href="#" >お問い合わせ</a></li>
+        </ul>
+        <!-- ここまでドロップダウンの中身 -->
+        </nav>
+    <div id="header">
+        <a id="title" style="margin:auto;color:#ffffff">リスト</a>
+        <a href="javascript:history.back()"><img class="upicon2" src="./img/back.png"></a>
+    </div>
+    
+    <script>
+        $(function() {
+            var listManagerInstance = new ListManager();
+            var goodsManagerInstance = new GoodsManager();
+            var localDBManagerInstance = new LocalDBManager();
+            var tabletID = localDBManagerInstance.selectTabletID();
+            //購入リスト取得
+            var listArray = {};
+            var listResult = listManagerInstance.getGoodsListToList(tabletID);
+            if(listResult != null){
+                var jsonList = JSON.parse(listResult);
+                var jsonListLength = jsonList.length;
+            }else{
+                jsonListLength = null;
+            }
+            var goodsID;
+            var goodsName;
+            var categoryID;
+            var categoryName;
+            var boughtSign;
+            var num;
+            var idTextGoods;
+            var numTextID;
+            var htmlText;
+            if(jsonListLength != null){
+                for(var i=0;i<jsonListLength;i++){
+                // 第二引数に obj を渡す
+                Object.keys(jsonList[i]).forEach(function(key) {
+                    goodsID = this['goodsID']; // this は obj
+                    goodsName = this['goodsName'];
+                    categoryID = this['categoryID'];
+                    categoryName = this['categoryName'];
+                    boughtSign = this['boughtSign'];
+                    num = this['num'];
+                }, jsonList[i]);
+                
+                idTextGoods = "Goods" + String(i+1);
+                numTextID = i;
+                if(i == 0){
+                    htmlText =  '<div class="list" id='+idTextGoods+'>'+
+                                '<div class="Name">'+goodsName+'</div>'+
+                                '<div class="count" id='+numTextID+'>'+num+'個</div>'+
+                                '<div class="plus"><button class="plusBtn" type="submit" onClick="plusGoodsNumBtnClick('+goodsID+','+numTextID+','+num+')"><img src="./img/plus.png"　style="width:100%;height:auto;"></button></div>'+
+                                '<div class="minus"><button class="plusBtn" type="submit" onClick="minusGoodsNumBtnClick('+goodsID+','+numTextID+','+num+')"><img src="./img/minus.png"　style="width:100%;height:auto;"></button></div>'+
+                                '</div>';
+                }else{
+                    htmlText =　htmlText + '<div class="list" id='+idTextGoods+'>'+
+                                '<div class="Name">'+goodsName+'</div>'+
+                                 '<div class="count" id='+numTextID+'>'+num+'個</div>'+
+                                '<div class="plus"><button class="plusBtn" type="submit" onClick="plusGoodsNumBtnClick('+goodsID+','+numTextID+','+num+')"><img src="./img/plus.png"　style="width:100%;height:auto;"></button></div>'+
+                                '<div class="minus"><button class="plusBtn" type="submit" onClick="minusGoodsNumBtnClick('+goodsID+','+numTextID+','+num+')"><img src="./img/minus.png"　style="width:100%;height:auto;"></button></div>'+
+                                '</div>';
+                }
+            };
+            var parent_object = document.getElementById("list");
+            parent_object.innerHTML = htmlText;
+            }
+            
+            
+            
+            //カテゴリーリスト取得
+            var tabletID = localDBManagerInstance.selectTabletID();
+            var categoryResult = goodsManagerInstance.getCategoryList(tabletID);
+            var jsonList = JSON.parse(categoryResult);
+            var categoryGoodsResult;
+            var jsonList2;
+            var categoryID;
+            var categoryName;
+            for(var i=0,l=17;i<l;i++){
+                 // 第二引数に obj を渡す
+                Object.keys(jsonList[i]).forEach(function(key) {
+                    categoryID = this['categoryID']; // this は obj
+                    categoryName = this['categoryName']; // this は obj
+                }, jsonList[i]);
+                if(i == 0){
+                    htmlText = '<li class="list" id='+categoryID+'><a href="#" onclick=getList()";return false;">'+categoryName+'</a>';
+                }else{
+                    htmlText = htmlText + '</li><li class="list" id='+categoryID+'><a href="#" onclick=";return false;">'+categoryName+'</a>';
+                }
+                //カテゴリーに対応している商品取得
+                categoryGoodsResult = goodsManagerInstance.getGoods(tabletID,categoryID);
+                if(categoryGoodsResult != null){
+                    jsonList2 = JSON.parse(categoryGoodsResult);
+                    var jsonList2Length = jsonList2.length;
+                    htmlText = htmlText + '<ul>';
+                    for(var j=0;j<jsonList2Length;j++){
+                        Object.keys(jsonList2[j]).forEach(function(key) {
+                            goodsID = this['goodsID']; // this は obj
+                            goodsName = this['goodsName']; // this は obj
+                        }, jsonList2[j]);
+                        if(j == 0){
+                            htmlText = htmlText + '<li><a href="#" onclick="addGoodsListBtnClick('+goodsID+')";return false;>'+goodsName+'</a></li>';
+                        }else{
+                            htmlText = htmlText + '<li><a href="#" onclick="addGoodsListBtnClick('+goodsID+')";return false;>'+goodsName+'</a></li>';
+                        };
+                    };
+                    htmlText = htmlText + '</ul>';
+                }
+            };
+            htmlText = htmlText + '</li>';
+            var parent_object = document.getElementById("dropmenu");
+            parent_object.innerHTML = htmlText;
+        });
+    </script>
+    <div class="a" id="main">
+        <div class="view" id="list">
+        </div>
+        <div class="view" id="category">
+            <ul class="dropmenu" id="dropmenu">
+            </ul>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('.drawer').drawer();
+        });
+    </script>
+</body>
+</html>

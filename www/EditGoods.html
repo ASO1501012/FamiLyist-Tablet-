@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <link rel="stylesheet" href="components/loader.css">
+    <script src="components/loader.js"></script>
+    <script src="components/GoodsManager.js"></script>
+    <script src="components/LocalDBManager.js"></script>
+    <script>
+        function editGoodsBtnClick(){
+            var goodsManagerInstance = new GoodsManager();
+            var localDBManagerInstance = new LocalDBManager();
+            var tabletID = localDBManagerInstance.selectTabletID();
+            goodsManagerInstance.editGoods(tabletID,document.getElementById("goodsID").value,document.getElementById("goodsName").value,document.getElementById("categoryID").value);
+        }
+    </script>
+</head>
+<body>
+    <h2>Goods edit</h2><br>
+    goodsID:<input type="text" id="goodsID" name="goodsID"><br>
+    品名:<input type="text" id="goodsName" name="goodsName"><br>
+    カテゴリー:<input type="text" id="categoryID" name="categoryID"><br>
+    <button id="submit" onClick="editGoodsBtnClick();">OK</button>
+</body>
+</html>

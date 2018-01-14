@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <link rel="stylesheet" href="components/loader.css">
+    <script src="components/loader.js"></script>
+    <script>
+        function submitBtnClick(){
+            var goodsManagerInstance = new GoodsManager();
+            goodsManagerInstance.editShop(document.getElementById("shopID").textContent,document.getElementById("shopName").textContent);
+        }
+        
+        function deleteBtnClick(){
+            var goodsManagerInstance = new GoodsManager();
+            goodsManagerInstance.deleteShop(document.getElementById("shopID").textContent);
+        }
+    </script>
+</head>
+<body>
+    <h2>Shop edit</h2><br>
+    <input type="hidden" id="shopID" name="shopID" value="">
+    店の名前:<input type="text" id="shopName" name="shopName"><br>
+    
+    <!-- GoogleMap挿入予定 -->
+        
+    <button id="submit" onClick="submitBtnClick();">OK</button>
+    
+    
+    <button id="submit" onClick="deleteBtnClick();">削除</button>
+</body>
+</html>

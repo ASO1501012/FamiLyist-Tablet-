@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <link rel="stylesheet" href="components/loader.css">
+    <script src="components/loader.js"></script>
+    <script src="components/ListManager.js"></script>
+    <script src="components/LocalDBManager.js"></script>
+    <script>
+        function getGoodsListBtnClick(){
+            var listManagerInstance = new ListManager();
+            var localDBManagerInstance = new LocalDBManager();
+            var tabletID = localDBManagerInstance.selectTabletID();
+            listManagerInstance.getGoodsList(tabletID);
+        }
+        function addGoodsListBtnClick(){
+            var listManagerInstance = new ListManager();
+            var localDBManagerInstance = new LocalDBManager();
+            var tabletID = localDBManagerInstance.selectTabletID();
+            listManagerInstance.addGoods(tabletID,document.getElementById("goodsID").value);
+        }
+        function deleteGoodsListBtnClick(){
+            var listManagerInstance = new ListManager();
+            var localDBManagerInstance = new LocalDBManager();
+            var tabletID = localDBManagerInstance.selectTabletID();
+            listManagerInstance.deleteGoods(tabletID,document.getElementById("deleteGoodsID").value);
+        }
+        function plusGoodsNumBtnClick(){
+            var listManagerInstance = new ListManager();
+            var localDBManagerInstance = new LocalDBManager();
+            var tabletID = localDBManagerInstance.selectTabletID();
+            alert(tabletID);
+            alert(document.getElementById("plusGoodsID").value);
+            listManagerInstance.plusGoods(tabletID,document.getElementById("plusGoodsID").value);
+        }
+        function minusGoodsNumBtnClick(){
+            var listManagerInstance = new ListManager();
+            var localDBManagerInstance = new LocalDBManager();
+            var tabletID = localDBManagerInstance.selectTabletID();
+            listManagerInstance.minusGoods(tabletID,document.getElementById("minusGoodsID").value);
+        }
+        function homeBtnClick(){
+            window.location.href = './index.html';  
+        }
+    </script>
+</head>
+<body>
+    categoryID:<input type="text" id="categoryID" name="categoryID"><br>
+    <button id="submit" onClick="getGoodsListBtnClick();">GetGoodsList</button><br>
+    
+    商品ID:<input type="text" id="goodsID" name="goodsID"><br>
+    <button id="submit" onClick="addGoodsListBtnClick();">AddGoodsList</button><br>
+    
+    商品ID:<input type="text" id="deleteGoodsID" name="deleteGoodsID"><br>
+    <button id="submit" onClick="deleteGoodsListBtnClick();">DeleteGoodsList</button><br>
+    
+    商品ID:<input type="text" id="plusGoodsID" name="plusGoodsID"><br>
+    <button id="submit" onClick="plusGoodsNumBtnClick();">PulusGoodsNum</button><br>
+    
+    商品ID:<input type="text" id="minusGoodsID" name="minusGoodsID"><br>
+    <button id="submit" onClick="minusGoodsNumBtnClick();">MinusGoodsNum</button><br>
+    
+    <button id="submit" onClick="homeBtnClick();">index.html</button><br>
+</body>
+</html>

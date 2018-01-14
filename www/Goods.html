@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <link rel="stylesheet" href="components/loader.css">
+    <script src="components/loader.js"></script>
+    <script src="components/GoodsManager.js"></script>
+    <script src="components/LocalDBManager.js"></script>
+    <script>    
+        function registerGoodsBtnClick(){
+            var goodsManagerInstance = new GoodsManager();
+            var localDBManagerInstance = new LocalDBManager();
+            var tabletID = localDBManagerInstance.selectTabletID();
+            goodsManagerInstance.registerGoods(tabletID,document.getElementById("registerGoodsName").value,document.getElementById("registerCategoryID").value);
+        }
+        function editGoodsBtnClick(){
+            var goodsManagerInstance = new GoodsManager();
+            var localDBManagerInstance = new LocalDBManager();
+            var tabletID = localDBManagerInstance.selectTabletID();
+            goodsManagerInstance.editGoods(tabletID,document.getElementById("editGoodsID").value,document.getElementById("editGoodsName").value,document.getElementById("editCategoryID").value);
+        }
+        function getGoodsBtnClick(){
+            var goodsManagerInstance = new GoodsManager();
+            var localDBManagerInstance = new LocalDBManager();
+            var tabletID = localDBManagerInstance.selectTabletID();
+            goodsManagerInstance.getGoods(tabletID,document.getElementById("getCategoryID").value);
+        }
+        function deleteGoodsBtnClick(){
+            var goodsManagerInstance = new GoodsManager();
+            var localDBManagerInstance = new LocalDBManager();
+            var tabletID = localDBManagerInstance.selectTabletID();
+            goodsManagerInstance.deleteGoods(tabletID,document.getElementById("deleteGoodsID").value);
+        }
+        function homeBtnClick(){
+            window.location.href = './index.html';  
+        }
+    </script>
+</head>
+<body>
+    <h2>Goods</h2><br>
+    品名:<input type="text" id="registerGoodsName" name="registerGoodsName"><br>
+    カテゴリーID:<input type="text" id="registerCategoryID" name="registerCategoryID"><br>
+    <button id="submit" onClick="registerGoodsBtnClick();">RegisterGoods</button><br>
+    
+    goodsID:<input type="text" id="editGoodsID" name="editGoodsID"><br>
+    品名:<input type="text" id="editGoodsName" name="editGoodsName"><br>
+    カテゴリーID:<input type="text" id="editCategoryID" name="editCategoryID"><br>
+    <button id="submit" onClick="editGoodsBtnClick();">EditGoods</button><br>
+    
+    カテゴリーID:<input type="text" id="getCategoryID" name="getCategoryID"><br>
+    <button id="submit" onClick="getGoodsBtnClick();">GetGoods</button><br>
+    
+    商品ID:<input type="text" id="deleteGoodsID" name="deleteGoodsID"><br>
+    <button id="submit" onClick="deleteGoodsBtnClick();">DeleteGoods</button><br>
+    
+    <button id="submit" onClick="homeBtnClick();">index.html</button><br>
+</body>
+</html>

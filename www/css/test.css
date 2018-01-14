@@ -1,0 +1,79 @@
+.dropmenu{
+    display: block; 
+    border: 1px solid #9F99A3;
+    background-color: #f9d6d4;
+    text-decoration: none;
+    /*color: #333;*/
+    width:100%;
+    text-align: center;
+    font-size: 25px;
+}
+.dropmenu:after{ content: ""; display: block; clear: both; }
+ul.dropmenu{  margin: 0; padding: 0; }
+.dropmenu ul{
+	position: absolute;
+	margin: 0;
+	padding: 0;
+ }
+/*一番最初に表示されるメニュー名*/ 
+.dropmenu li{
+	list-style-type: none;
+	position: relative;
+	width: 100%;
+	height: 27px;
+	line-height: 27px;
+	background: #f9d6d4;
+	text-align: center;
+}
+.dropmenu li a{
+	display: block;
+	height: 27px;
+	line-height: 27px;
+	vertical-align: middle;
+    /*ここが右側のメニューの文字色*/
+	color: #330000;
+	text-decoration: none;
+    
+}
+.dropmenu li span{
+	display: table-cell;
+	width: 100px;
+	height: 27px;
+	line-height: 27px;
+	vertical-align: middle;
+	background-color: #f9d6d4;
+    /*ここがたぶん右側のメニューを押した後の文字色*/
+	color: #330000;
+	text-decoration: none;
+	cursor: pointer;
+}
+.dropmenu li ul li{
+	float: left;
+	position: relative;
+    /*左右設定 */ 
+	right: 400px;
+	top: -27px;
+}
+/*左に出てくるメニューの設定*/ 
+.dropmenu li ul li a{
+	height: 27;
+    width: 400px;
+	line-height: 27px;
+	vertical-align: middle;
+	border: 1px solid #9F99A3;
+	background: #f9d6d4;
+	text-align: center;
+    white-space: nowrap;
+    overflow-x: scroll;
+}
+.dropmenu li:hover > a{ background: #f9d6d4; }
+.dropmenu li a:hover, .dropmenu li span:hover{ background: #f9d6d4;  }
+.dropmenu li ul li{
+	overflow: hidden;
+	height: 0;
+	transition: .2s;
+}
+.dropmenu li:hover ul li{
+	overflow: visible;
+	height: 27px;
+}

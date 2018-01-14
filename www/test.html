@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <link rel="stylesheet" href="components/loader.css">
+    <link rel="stylesheet" href="css/test.css"> 
+    <script src="components/loader.js"></script>
+    <script>
+        //
+        // TODO: Write JavaScript code here
+        //
+    </script>
+</head>
+<body>
+<script>
+    function add()
+    {
+        var div_element = document.createElement("div");
+        div_element.innerHTML = "<ul class='dropmenu'><li><a href='#'>test</a><ul><li><a href='#'>sub1</a></li></ul></li><li><a href='#'>test2</a><ul><li><a href='#'>sub2</a></li></ul></li></ul>";
+        var parent_object = document.getElementById("piyo");
+        parent_object.appendChild(div_element);
+    }
+</script>
+    <div>
+    <button onclick="add();">このボタンを押して動的にUIを追加！</button>
+    </div>
+     
+    <div id="piyo">
+    </div>
+        
+    <ul class="dropmenu">
+        <li><a href="#">menu</a>
+            <ul>
+               <li><a href="#">sub1</a></li>
+               <li><a href="#">sub2</a></li>
+               <li><a href="#">sub3</a></li>
+               <li><a href="#">sub4</a></li>
+            </ul>
+        </li>
+        <li><a href="#">menu</a>
+            <ul>
+                <li><a href="#">sub11</a></li>
+                <li><a href="#">sub12</a></li>
+                <li><a href="#">sub13</a></li>
+            </ul>
+        </li>
+        <li><a href="#">menu</a>
+            <ul>
+                <li><a href="#">sub21</a></li>
+                <li><a href="#">sub22</a></li>
+                <li><a href="#">sub23</a></li>
+            </ul>
+        </li>
+    </ul>
+</body>
+</html>
+
